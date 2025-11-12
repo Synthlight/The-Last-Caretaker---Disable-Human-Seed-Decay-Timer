@@ -8,6 +8,8 @@
 #include "PatchThreading.h"
 #include "Util.h"
 
+// For v0.5.0.581804.
+
 BOOL APIENTRY DllMain(const HMODULE hModule, const DWORD ulReasonForCall, const LPVOID lpReserved) {
     SetupLog(GetLogPathAsCurrentDllDotLog());
     if (EndsWith(GetFullModulePath(), ".asi")) {
@@ -24,11 +26,18 @@ bool DisableHumanSeedDecayTimer(const std::string& moduleName, const PTR_SIZE mo
 }
 
 void DoInjection() {
-    const auto moduleName   = "VoyageSteam-Win64-Shipping.exe";
-    const auto moduleHandle = GetModuleHandle(moduleName);
+    auto moduleName   = "VoyageSteam-Win64-Shipping.exe";
+    auto moduleHandle = GetModuleHandle(moduleName);
+
+    if (moduleHandle == nullptr) {
+        LOG("Unable to find `VoyageSteam-Win64-Shipping.exe` module, trying again for `VoyageEpic-Win64-Shipping.exe`.");
+        moduleName   = "VoyageEpic-Win64-Shipping.exe";
+        moduleHandle = GetModuleHandle(moduleName);
+    }
 
     if (moduleHandle == nullptr) {
         LOG("Unable to find module, aborting.");
+        MessageBoxW(nullptr, L"Patching failed.", L"Patching Failed", MB_ICONERROR | MB_OK);
         return;
     }
 
