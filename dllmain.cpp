@@ -8,7 +8,7 @@
 #include "PatchThreading.h"
 #include "Util.h"
 
-// For v0.5.0.581804.
+// For v0.6.0.606504.
 
 BOOL APIENTRY DllMain(const HMODULE hModule, const DWORD ulReasonForCall, const LPVOID lpReserved) {
     SetupLog(GetLogPathAsCurrentDllDotLog());
@@ -22,10 +22,12 @@ BOOL APIENTRY DllMain(const HMODULE hModule, const DWORD ulReasonForCall, const 
 
 bool DisableHumanSeedDecayTimer(const std::string& moduleName, const PTR_SIZE moduleAddress, AllocateMemory* allocator, LogBuffer* logBuffer) {
     // Search for seconds as a float.
-    return DoSimplePatch(moduleName, moduleAddress, "Disable Human Seed Decay Timer", "F3 0F 5C FE F3 0F 11 BB 18 03 00 00", FOUR_BYTE_NOP, logBuffer);
+    return DoSimplePatch(moduleName, moduleAddress, "Disable Human Seed Decay Timer", "F3 0F 5C FE F3 0F 11 BB 20 03 00 00", FOUR_BYTE_NOP, logBuffer);
 }
 
 void DoInjection() {
+    LOG("Initializing v1.2.0.");
+
     auto moduleName   = "VoyageSteam-Win64-Shipping.exe";
     auto moduleHandle = GetModuleHandle(moduleName);
 

@@ -75,8 +75,8 @@
       <AdditionalDependencies>version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)$(TargetName).dll" "O:\SteamLibrary\steamapps\common\Voyage\Voyage\Binaries\Win64\plugins\Disable-Human-Seed-Decay-Timer.asi" /y
-copy "$(TargetDir)$(TargetName).pdb" "O:\SteamLibrary\steamapps\common\Voyage\Voyage\Binaries\Win64\plugins\Disable-Human-Seed-Decay-Timer.pdb" /y</Command>
+      <Command>copy "$(OutDir)$(TargetName).dll" "R:\Games\The Last Caretaker\Sync\Plugins\$(RootNamespace).asi" /y
+copy "$(OutDir)$(TargetName).pdb" "R:\Games\The Last Caretaker\Sync\Plugins\$(RootNamespace).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,12 +103,13 @@ copy "$(TargetDir)$(TargetName).pdb" "O:\SteamLibrary\steamapps\common\Voyage\Vo
       <AdditionalDependencies>version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)$(TargetName).dll" "O:\SteamLibrary\steamapps\common\Voyage\Voyage\Binaries\Win64\plugins\Disable-Human-Seed-Decay-Timer.asi" /y
-copy "$(TargetDir)$(TargetName).pdb" "O:\SteamLibrary\steamapps\common\Voyage\Voyage\Binaries\Win64\plugins\Disable-Human-Seed-Decay-Timer.pdb" /y</Command>
+      <Command>copy "$(OutDir)$(TargetName).dll" "R:\Games\The Last Caretaker\Sync\Plugins\$(RootNamespace).asi" /y
+copy "$(OutDir)$(TargetName).pdb" "R:\Games\The Last Caretaker\Sync\Plugins\$(RootNamespace).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -121,6 +122,9 @@ copy "$(TargetDir)$(TargetName).pdb" "O:\SteamLibrary\steamapps\common\Voyage\Vo
     <ProjectReference Include="..\Base-Dll-Proxy\Base-Dll-Proxy.vcxproj">
       <Project>{5a1e571d-6aea-451d-8f65-4c0ca06654b8}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Disable-Human-Seed-Decay-Timer.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
